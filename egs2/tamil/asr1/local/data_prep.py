@@ -24,9 +24,6 @@ def read_tamil_data(audio_csv, sentences_csv, export_csv):
     audio_df = pd.read_csv(audio_csv)
     output_df = []
 
-    # if not os.path.exists("wavs"):
-    #     os.mkdir("wavs")
-
     for i in range(len(sent_df)):
         intent, intent_details, inflection, transcript = (
             sent_df.iloc[i]["intent"],
@@ -95,7 +92,6 @@ for partition in dir_dict:
         wav_scp_f.truncate()
         utt2spk_f.truncate()
         transcript_df = pd.read_csv(os.path.join(DATA_DIR, dir_dict[partition]))
-        # lines = sorted(transcript_df.values, key=lambda s: s[0])
         for row in transcript_df.values:
             words = row[4].replace(" ", "_") + " " + " ".join([ch for ch in row[3]])
             path_arr = row[1].split("/")
